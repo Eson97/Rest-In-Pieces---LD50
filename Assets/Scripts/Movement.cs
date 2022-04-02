@@ -32,7 +32,12 @@ public class Movement : MonoBehaviour
             ? baseSpeed / 2
             : baseSpeed;
 
-
         body.velocity = velocity * speed * Time.deltaTime;
+
+        if(transform.childCount > 0)
+        {
+            var child = transform.GetChild(0).gameObject;
+            child.transform.position = transform.position;
+        }
     }
 }

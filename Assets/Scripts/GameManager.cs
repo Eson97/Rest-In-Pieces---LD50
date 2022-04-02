@@ -22,13 +22,35 @@ public class GameManager : MonoBehaviour
     }
 
     //References
-    public List<GameObject> containers;
-    public List<GameObject> cops;
-    public List<GameObject> bodyParts;
     public GameObject player;
+    public Transform currentBodyPart;
 
     //Logic
     public int traps = 3;
-    public int CurrentBodyPart = -1;
     public Status status = Status.empty;
+
+    public void SetBodyPartParent(Transform parent)
+    {
+        if (currentBodyPart == null) return;
+
+        currentBodyPart.SetParent(parent);
+        currentBodyPart.position = parent.position;
+        
+        if (parent.tag == "ContainerFull")
+            currentBodyPart = null;
+    }
+    public void SetBodyPartParent(Transform BodyPart,Transform parent)
+    {
+        if(parent == null) return;
+
+        currentBodyPart = BodyPart;
+        currentBodyPart.SetParent(parent);
+        currentBodyPart.position = parent.position;
+    }
+    public void RemoveBodyPartParent()
+    {
+        currentBodyPart.parent = null;
+        currentBodyPart.position = player.transform.position;
+    }
+
 }

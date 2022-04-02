@@ -7,26 +7,27 @@ public class Container_v2 : MonoBehaviour
     [SerializeField] private Sprite emptyContainer;
     [SerializeField] private Sprite fullContainer;
     [SerializeField] private SpriteRenderer Dialog;
+    [SerializeField] private Transform player;
 
-    private bool inRange;
+    private bool inRange = false;
     private bool isEmpty = true;
-    private int bodyPart = -1;
 
     void Update()
     {
         if (inRange && Input.GetKeyDown(KeyCode.Space))
         {
-            if (GameManager.instance.CurrentBodyPart < 0 && isEmpty) return;
+
+            if (GameManager.instance.status == Status.empty && isEmpty) return;
 
             if (isEmpty)
             {
                 GetComponent<SpriteRenderer>().sprite = fullContainer;
                 isEmpty = false;
-
-                bodyPart = GameManager.instance.CurrentBodyPart;
-                GameManager.instance.CurrentBodyPart = -1;
-
                 gameObject.tag = "ContainerFull";
+
+                GameManager.instance.SetBodyPartParent(transform);
+                GameManager.instance.status = Status.empty;
+
 
                 Debug.Log("Se guardo una parte");
             }
@@ -34,11 +35,12 @@ public class Container_v2 : MonoBehaviour
             {
                 GetComponent<SpriteRenderer>().sprite = emptyContainer;
                 isEmpty = true;
-                
-                GameManager.instance.CurrentBodyPart = bodyPart;
-                bodyPart = -1;
-
                 gameObject.tag = "ContainerEmpty";
+
+                GameManager.instance.SetBodyPartParent(transform.GetChild(1), player);
+                GameManager.instance.status = Status.carry;
+
+
 
                 Debug.Log("Se saco una parte");
             }
@@ -49,9 +51,9 @@ public class Container_v2 : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            if (GameManager.instance.CurrentBodyPart < 0 && isEmpty) return;
-            Dialog.enabled = true;
+            if (GameManager.instance.status == Status.empty && isEmpty) return;
             inRange = true;
+            Dialog.enabled = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -60,8 +62,7 @@ public class Container_v2 : MonoBehaviour
         {
             if (Dialog.enabled)
                 Dialog.enabled = false;
-            if(inRange)
-                inRange = false;
+            inRange = false;
         }
     }
 }

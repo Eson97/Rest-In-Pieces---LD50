@@ -34,16 +34,21 @@ public class CopDetection_v2 : MonoBehaviour
         {
             playerDetected = true;
             Debug.Log("se encontro al jugador");
-        }   
+        }
+        if(collision.tag == "BodyPart")
+        {
+            bodyDetected = true;
+            Debug.Log("Se encontro un cuerpo en el suelo");
+        }
     }
 
     //si esta pegado al objeto (tambien se puede pasar al contenedor para que este se encargue de cambiar la animacion)
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "ContainerFull" || collision.gameObject.tag == "BodyPart")
+        if(collision.gameObject.tag == "ContainerFull")
         {
             bodyDetected = true;
-            Debug.Log("Se encontro un cuerpo");
+            Debug.Log("Se encontro un cuerpo en contenedor");
         }
         if(collision.gameObject.tag == "ContainerEmpty")
         {
