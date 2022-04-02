@@ -17,7 +17,8 @@ public class Detection : Collidable
         Debug.Log("player in range");
 
         GameObject Player = collider.gameObject;
-        Player.GetComponent<Movement>().enabled = false;
+        Player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        
     }
 
     protected virtual void Search()

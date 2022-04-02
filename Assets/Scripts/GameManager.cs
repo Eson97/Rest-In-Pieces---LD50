@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     //References
@@ -25,4 +24,5 @@ public class GameManager : MonoBehaviour
 
     //Logic
     public int traps = 3;
+    public int CurrentBodyPart = -1;
 }

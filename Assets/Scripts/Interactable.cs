@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,14 +12,13 @@ public class Interactable : Collidable
     {
         if (collider.tag == "Player")
             canInteract();
-        else if(collider.tag =="Cop")
+        else if (collider.tag == "Cop")
             canSearch();
     }
 
     protected virtual void canInteract()
     {
         inRange = true;
-        Debug.Log("player in range");
     }
 
     protected virtual void canSearch()
