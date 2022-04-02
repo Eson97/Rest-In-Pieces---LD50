@@ -7,17 +7,16 @@ public class Collidable : MonoBehaviour
 {
     [SerializeField] private ContactFilter2D contactFilter;
 
-    private CircleCollider2D circleCollider;
+    [SerializeField] private Collider2D _collider;
     private Collider2D[] hits = new Collider2D[10];
 
-    protected virtual void Start()
-    {
-        circleCollider = GetComponent<CircleCollider2D>();
-    }
+    //protected virtual void Start()
+    //{
+    //}
 
     protected virtual void Update()
     {
-        circleCollider.OverlapCollider(contactFilter, hits);
+        _collider.OverlapCollider(contactFilter, hits);
         for (int i = 0; i < hits.Length; i++)
         {
             if (hits[i] == null)

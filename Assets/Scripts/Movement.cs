@@ -7,7 +7,7 @@ public class Movement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D body;
 
-    [SerializeField] private float speed = 1f;
+    [SerializeField] private float baseSpeed = 300f;
 
     private Vector2 velocity;
 
@@ -28,6 +28,11 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        float speed = (GameManager.instance.status == Status.carry)
+            ? baseSpeed / 2
+            : baseSpeed;
+
+
         body.velocity = velocity * speed * Time.deltaTime;
     }
 }

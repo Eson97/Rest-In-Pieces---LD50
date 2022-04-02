@@ -16,6 +16,11 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
+    private void Update()
+    {
+        //TODO: Add time count
+    }
+
     //References
     public List<GameObject> containers;
     public List<GameObject> cops;
@@ -25,4 +30,5 @@ public class GameManager : MonoBehaviour
     //Logic
     public int traps = 3;
     public int CurrentBodyPart = -1;
+    public Status status = Status.empty;
 }

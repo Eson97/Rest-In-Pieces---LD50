@@ -1,20 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] GameObject Trap;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject Trap;
+    [SerializeField] private CinemachineVirtualCamera LocalCam;
+    [SerializeField] private CinemachineVirtualCamera GlobalCam;
+
+    private Rigidbody2D body;
+
+    private void Start()
     {
-        
+        body = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
+    private void OnEnable()
+    {
+        CameraSwitcher.Register(LocalCam);
+        CameraSwitcher.Register(GlobalCam);
+        CameraSwitcher.SwitchCamera(LocalCam);
+    }
+    private void OnDisable()
+    {
+        CameraSwitcher.Unregister(LocalCam);
+        CameraSwitcher.Unregister(GlobalCam);
+    }
+
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if(GameManager.instance.traps > 0)
+            {
+                GameManager.instance.traps--;
+                Instantiate(Trap, transform.position, Quaternion.identity);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (CameraSwitcher.activeCamera == LocalCam)
+            {
+                CameraSwitcher.SwitchCamera(GlobalCam);
+                body.bodyType = RigidbodyType2D.Static;
+            }
+            else if(CameraSwitcher.activeCamera == GlobalCam)
+            {
+                CameraSwitcher.SwitchCamera(LocalCam);
+                body.bodyType = RigidbodyType2D.Dynamic;
+            }
+        }
+        /**
+         * TODO:
+         * -Recolectar y soltar partes del cuerpo
+         */
+
     }
 }
