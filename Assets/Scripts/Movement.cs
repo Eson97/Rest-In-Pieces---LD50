@@ -28,6 +28,8 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (body.bodyType == RigidbodyType2D.Static) return;
+
         float speed = (GameManager.instance.status == Status.carry)
             ? baseSpeed / 2
             : baseSpeed;

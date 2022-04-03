@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     //References
     public GameObject player;
     public Transform currentBodyPart;
+    public List<Transform> ContainersPosition;
 
     //Logic
     public int traps = 3;

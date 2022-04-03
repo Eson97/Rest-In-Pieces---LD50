@@ -15,7 +15,7 @@ public class CopDetection_v2 : MonoBehaviour
     {
         if (!isPlayerStatic && (playerDetected || bodyDetected))
         {
-            //playerBody.bodyType = RigidbodyType2D.Static;
+            playerBody.bodyType = RigidbodyType2D.Static;
             isPlayerStatic = true;
 
             //Start GameOver

@@ -15,7 +15,7 @@ public class BodyPart : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         circleCollider = GetComponent<CircleCollider2D>();
-        spriteRenderer.sprite = _sprite;
+        //spriteRenderer.sprite = _sprite;
     }
 
     void Update()
@@ -50,11 +50,15 @@ public class BodyPart : MonoBehaviour
         {
             //spriteRenderer.enabled = false;
             circleCollider.enabled = false;
+            inRange = true;
+            isBeingCarried = true;
         }
         else
         {
             //spriteRenderer.enabled = false;
             circleCollider.enabled = false;
+            inRange = false;
+            isBeingCarried = false;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

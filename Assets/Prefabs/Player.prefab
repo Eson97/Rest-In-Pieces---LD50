@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 773945329231583746}
   - component: {fileID: 773945329231583745}
   - component: {fileID: 773945329231583870}
+  - component: {fileID: 151787818568106726}
   - component: {fileID: 773945329231583744}
   - component: {fileID: 5942672157358483540}
   m_Layer: 0
@@ -75,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.6874083, g: 0.7254902, b: 0.2509804, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e36f0c469726b98498f82fd02c0c056a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -120,18 +121,44 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.039990306, y: -0.85312724}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.722, y: 1.882}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5734365, y: 0.146873}
+  m_EdgeRadius: 0
+--- !u!61 &151787818568106726
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773945329231583749}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.03656292, y: -0.21328449}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.722, y: 1.882}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.57574797, y: 1.455431}
   m_EdgeRadius: 0
 --- !u!114 &773945329231583744
 MonoBehaviour:
@@ -145,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b97b8ab8fd0ee540941077b186b382f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 300
+  baseSpeed: 300
 --- !u!114 &5942672157358483540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,3 +186,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Trap: {fileID: 0}
+  LocalCam: {fileID: 0}
+  GlobalCam: {fileID: 0}
