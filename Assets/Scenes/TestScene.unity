@@ -263,7 +263,7 @@ MonoBehaviour:
   heuristic: 2
   heuristicScale: 1
   threadCount: 1
-  maxFrameTime: 1
+  maxFrameTime: 10
   batchGraphUpdates: 0
   graphUpdateBatchingInterval: 0.2
   euclideanEmbedding:
@@ -271,7 +271,7 @@ MonoBehaviour:
     seed: 0
     pivotPointRoot: {fileID: 0}
     spreadOutCount: 1
-  showGraphs: 1
+  showGraphs: 0
 --- !u!4 &304216945
 Transform:
   m_ObjectHideFlags: 0
@@ -567,6 +567,36 @@ PrefabInstance:
       objectReference: {fileID: 632977341}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0ed95552733990469059a55e6fe1fde, type: 3}
+--- !u!1 &749255351
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 749255352}
+  m_Layer: 0
+  m_Name: Distractor
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &749255352
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749255351}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.312556, y: -0.22069928, z: -3.5014977}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &793025008
 GameObject:
   m_ObjectHideFlags: 3
@@ -713,6 +743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 632977339}
   currentBodyPart: {fileID: 0}
+  distractorOrigin: {fileID: 749255352}
   ContainersPosition:
   - {fileID: 1888846079}
   - {fileID: 150583555}
@@ -720,6 +751,7 @@ MonoBehaviour:
   - {fileID: 1676324069}
   traps: 3
   status: 1
+  isDistractorOn: 0
 --- !u!4 &1502683838
 Transform:
   m_ObjectHideFlags: 0

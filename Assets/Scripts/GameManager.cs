@@ -24,11 +24,14 @@ public class GameManager : MonoBehaviour
     //References
     public GameObject player;
     public Transform currentBodyPart;
+    public Transform distractorOrigin;
     public List<Transform> ContainersPosition;
 
     //Logic
     public int traps = 3;
+    public int distractor = 1;
     public Status status = Status.empty;
+    public bool isDistractorOn = false;
 
     public void SetBodyPartParent(Transform parent)
     {

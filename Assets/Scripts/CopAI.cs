@@ -19,6 +19,8 @@ public class CopAI : MonoBehaviour
     private int CurrentWaypoint = 0;
     private int numberOfContainers;
     private bool reachedEndOfPath = false;
+    private bool isDistracted = false;
+    private bool hasBeenRedirected = false;
 
     void Start()
     {
@@ -33,8 +35,12 @@ public class CopAI : MonoBehaviour
     {
         if (path == null) return;
 
-        if(CurrentWaypoint >= path.vectorPath.Count)
+        if (GameManager.instance.isDistractorOn && !hasBeenRedirected) { isDistracted = true; hasBeenRedirected = true; }
+        
+
+        if (CurrentWaypoint >= path.vectorPath.Count || isDistracted)
         {
+            if (isDistracted) isDistracted = false;
             reachedEndOfPath = true;
             UpdatePath();
             return;
@@ -70,8 +76,16 @@ public class CopAI : MonoBehaviour
     {
         if (seeker.IsDone())
         {
-            target = GameManager.instance.ContainersPosition[UnityEngine.Random.Range(0, numberOfContainers)];
-            seeker.StartPath(body.position, target.position, OnPathComplete);
+            if (GameManager.instance.isDistractorOn)
+            {
+                target = GameManager.instance.distractorOrigin;
+                seeker.StartPath(body.position, target.position, OnPathComplete);
+            }
+            else
+            {
+                target = GameManager.instance.ContainersPosition[UnityEngine.Random.Range(0, numberOfContainers)];
+                seeker.StartPath(body.position, target.position, OnPathComplete);
+            }
         }
     }
 }

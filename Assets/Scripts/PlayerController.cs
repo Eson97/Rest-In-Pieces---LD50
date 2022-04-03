@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] private GameObject Trap;
+    [SerializeField] private GameObject Distractor;
     [SerializeField] private CinemachineVirtualCamera LocalCam;
     [SerializeField] private CinemachineVirtualCamera GlobalCam;
 
@@ -37,6 +38,14 @@ public class PlayerController : MonoBehaviour
             {
                 GameManager.instance.traps--;
                 Instantiate(Trap, transform.position, Quaternion.identity);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if(GameManager.instance.distractor > 0)
+            {
+                GameManager.instance.distractor--;
+                Instantiate(Distractor, transform.position, Quaternion.identity);
             }
         }
         if (Input.GetKeyDown(KeyCode.Tab))
