@@ -6,6 +6,8 @@ public class BodyPart : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private SpriteRenderer Dialog;
+    [SerializeField] private AudioSource Carry;
+    [SerializeField] private AudioSource Leave;
     private SpriteRenderer spriteRenderer;
     private CircleCollider2D circleCollider;
     private bool inRange = false;
@@ -27,6 +29,7 @@ public class BodyPart : MonoBehaviour
                 GameManager.instance.currentBodyPart = transform;
                 GameManager.instance.SetBodyPartParent(player);
                 isBeingCarried = true;
+                Carry.Play();
 
             }
             else
@@ -35,6 +38,7 @@ public class BodyPart : MonoBehaviour
                 GameManager.instance.RemoveBodyPartParent();
                 GameManager.instance.currentBodyPart = null;
                 isBeingCarried = false;
+                Leave.Play();
             }
         }
     }
@@ -47,7 +51,7 @@ public class BodyPart : MonoBehaviour
         }
         else if(transform.parent.tag == "Player")
         {
-            spriteRenderer.enabled = false;
+            spriteRenderer.enabled = true;
             circleCollider.enabled = false;
             inRange = true;
             isBeingCarried = true;

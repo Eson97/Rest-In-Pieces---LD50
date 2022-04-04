@@ -1,29 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CopDetection_v2 : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D playerBody;
-
     private bool playerDetected = false;
-    private bool isPlayerStatic = false;
     private bool bodyDetected = false;
-    private bool isLookingFor = false;
 
     void FixedUpdate()
     {
-        if (!isPlayerStatic && (playerDetected || bodyDetected))
+        if (playerDetected || bodyDetected)
         {
-            playerBody.bodyType = RigidbodyType2D.Static;
-            isPlayerStatic = true;
+            GameManager.instance.playerBody.bodyType = RigidbodyType2D.Static;
 
             //Start GameOver
-        }
+            SceneManager.LoadScene("GameOverScreen");
 
-        if (isLookingFor)
-        {
-            //Start Animation: Buscar
         }
     }
 
@@ -49,11 +42,6 @@ public class CopDetection_v2 : MonoBehaviour
         {
             bodyDetected = true;
             Debug.Log("Se encontro un cuerpo en contenedor");
-        }
-        if(collision.gameObject.tag == "ContainerEmpty")
-        {
-            isLookingFor = true;
-            Debug.Log("Se encontro contenedor vacio");
         }
         
     }

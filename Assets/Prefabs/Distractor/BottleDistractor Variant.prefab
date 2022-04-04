@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1743159996}
   - component: {fileID: 1743159997}
   - component: {fileID: 1743159998}
+  - component: {fileID: 5111759652489421512}
   m_Layer: 0
   m_Name: DistractorSprite
   m_TagString: Untagged
@@ -69,9 +70,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1443856077
+  m_SortingLayer: 4
+  m_SortingOrder: 30
   m_Sprite: {fileID: 21300000, guid: d9f0eed9209eaa349b7a1e43ca7d0641, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -102,6 +103,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5111759652489421512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743159995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb8ecb8e4e58384194e5333d9d7bfe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1945823843927454643
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109,13 +122,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4737532610210761521, guid: d552e472015fa404285101eee30761b7, type: 3}
+      propertyPath: duration
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7139781574195273683, guid: d552e472015fa404285101eee30761b7, type: 3}
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7139781574195273683, guid: d552e472015fa404285101eee30761b7, type: 3}
       propertyPath: m_Name
-      value: BottleDistractor
+      value: BottleDistractor Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7139781574195273692, guid: d552e472015fa404285101eee30761b7, type: 3}
       propertyPath: m_RootOrder

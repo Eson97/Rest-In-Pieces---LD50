@@ -155,9 +155,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1558839361
+  m_SortingLayer: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 2747690628134850419, guid: 16037dbd798344f57a526d53d48f5ead, type: 3}
   m_Color: {r: 0.39315814, g: 0.5849056, b: 0.2731399, a: 1}
   m_FlipX: 0
@@ -247,3 +247,4 @@ MonoBehaviour:
   emptyContainer: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   fullContainer: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   Dialog: {fileID: 6415957446725457967}
+  player: {fileID: 0}

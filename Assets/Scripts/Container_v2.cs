@@ -8,6 +8,9 @@ public class Container_v2 : MonoBehaviour
     [SerializeField] private SpriteRenderer fullContainer;
     [SerializeField] private SpriteRenderer Dialog;
     [SerializeField] private Transform player;
+    [SerializeField] private AudioSource Hide;
+    [SerializeField] private AudioSource Take;
+
 
     private bool inRange = false;
     private bool isEmpty = true;
@@ -28,6 +31,7 @@ public class Container_v2 : MonoBehaviour
 
                 GameManager.instance.SetBodyPartParent(transform);
                 GameManager.instance.status = Status.empty;
+                Hide.Play();
 
 
                 Debug.Log("Se guardo una parte");
@@ -42,6 +46,7 @@ public class Container_v2 : MonoBehaviour
 
                 GameManager.instance.SetBodyPartParent(transform.GetChild(transform.childCount - 1), player);
                 GameManager.instance.status = Status.carry;
+                Take.Play();
 
 
 

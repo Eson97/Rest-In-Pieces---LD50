@@ -9,18 +9,17 @@ public class Movement : MonoBehaviour
 
     [SerializeField] private Animator animator;
     [SerializeField] private float baseSpeed = 300f;
+    [SerializeField] private AudioSource stepsSoud;
 
     private Vector2 velocity;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         body = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         velocity.x = Input.GetAxisRaw("Horizontal");
@@ -30,6 +29,11 @@ public class Movement : MonoBehaviour
             spriteRenderer.flipX = true;
         else if(velocity.x < -0.01f)
             spriteRenderer.flipX = false;
+
+        if (GameManager.instance.status == Status.carry)
+            animator.SetBool("isCarring", true);
+        else
+            animator.SetBool("isCarring", false);
     }
 
     private void FixedUpdate()
@@ -42,12 +46,15 @@ public class Movement : MonoBehaviour
 
         animator.SetFloat("Speed",velocity.normalized.magnitude);
 
+        //if(velocity.normalized.magnitude > 0.01f && !stepsSoud.isPlaying) stepsSoud.Play();
+
         body.velocity = velocity.normalized * speed * Time.deltaTime;
 
-        if(transform.childCount > 0)
+        if(transform.childCount > 2)
         {
             var child = transform.GetChild(0).gameObject;
-            child.transform.position = transform.position;
+            var bodypart = transform.GetChild(2).gameObject;
+            bodypart.transform.position = child.transform.position;
         }
     }
 }

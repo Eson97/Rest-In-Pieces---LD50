@@ -20,7 +20,6 @@ public class CopAI : MonoBehaviour
 
     private int CurrentWaypoint = 0;
     private int numberOfContainers;
-    private bool reachedEndOfPath = false;
     private bool isDistracted = false;
     private bool hasBeenRedirected = false;
 
