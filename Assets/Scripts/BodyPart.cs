@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BodyPart : MonoBehaviour
 {
-    [SerializeField] private Sprite _sprite;
     [SerializeField] private Transform player;
+    [SerializeField] private SpriteRenderer Dialog;
     private SpriteRenderer spriteRenderer;
     private CircleCollider2D circleCollider;
     private bool inRange = false;
@@ -15,7 +15,6 @@ public class BodyPart : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         circleCollider = GetComponent<CircleCollider2D>();
-        //spriteRenderer.sprite = _sprite;
     }
 
     void Update()
@@ -48,14 +47,16 @@ public class BodyPart : MonoBehaviour
         }
         else if(transform.parent.tag == "Player")
         {
-            //spriteRenderer.enabled = false;
+            spriteRenderer.enabled = false;
             circleCollider.enabled = false;
             inRange = true;
             isBeingCarried = true;
+            GameManager.instance.status = Status.carry;
+            GameManager.instance.currentBodyPart = transform;
         }
         else
         {
-            //spriteRenderer.enabled = false;
+            spriteRenderer.enabled = false;
             circleCollider.enabled = false;
             inRange = false;
             isBeingCarried = false;
@@ -66,6 +67,8 @@ public class BodyPart : MonoBehaviour
         if (collision.tag == "Player")
         {
             inRange = true;
+            if(GameManager.instance.status == Status.empty)
+                Dialog.enabled = true;
         }
     }
 
@@ -74,6 +77,8 @@ public class BodyPart : MonoBehaviour
         if (collision.tag == "Player")
         {
             inRange = false;
+            if(Dialog.enabled)
+                Dialog.enabled = false;
         }
     }
 }

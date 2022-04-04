@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D body;
 
+    [SerializeField] private Animator animator;
     [SerializeField] private float baseSpeed = 300f;
 
     private Vector2 velocity;
@@ -24,6 +25,11 @@ public class Movement : MonoBehaviour
     {
         velocity.x = Input.GetAxisRaw("Horizontal");
         velocity.y = Input.GetAxisRaw("Vertical");
+
+        if (velocity.x > 0.01f)
+            spriteRenderer.flipX = true;
+        else if(velocity.x < -0.01f)
+            spriteRenderer.flipX = false;
     }
 
     private void FixedUpdate()
@@ -34,7 +40,9 @@ public class Movement : MonoBehaviour
             ? baseSpeed / 2
             : baseSpeed;
 
-        body.velocity = velocity * speed * Time.deltaTime;
+        animator.SetFloat("Speed",velocity.normalized.magnitude);
+
+        body.velocity = velocity.normalized * speed * Time.deltaTime;
 
         if(transform.childCount > 0)
         {

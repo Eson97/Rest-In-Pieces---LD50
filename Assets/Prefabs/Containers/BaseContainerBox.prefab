@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 2081259609674763295}
   - component: {fileID: 2502571562396527371}
   m_Layer: 0
-  m_Name: ContainerBox
+  m_Name: BaseContainerBox
   m_TagString: ContainerEmpty
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

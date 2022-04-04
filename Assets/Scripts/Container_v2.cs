@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Container_v2 : MonoBehaviour
 {
-    [SerializeField] private Sprite emptyContainer;
-    [SerializeField] private Sprite fullContainer;
+    [SerializeField] private SpriteRenderer emptyContainer;
+    [SerializeField] private SpriteRenderer fullContainer;
     [SerializeField] private SpriteRenderer Dialog;
     [SerializeField] private Transform player;
 
@@ -21,7 +21,8 @@ public class Container_v2 : MonoBehaviour
 
             if (isEmpty)
             {
-                GetComponent<SpriteRenderer>().sprite = fullContainer;
+                fullContainer.enabled = true;
+                emptyContainer.enabled = false;
                 isEmpty = false;
                 gameObject.tag = "ContainerFull";
 
@@ -33,11 +34,13 @@ public class Container_v2 : MonoBehaviour
             }
             else
             {
-                GetComponent<SpriteRenderer>().sprite = emptyContainer;
+                if (GameManager.instance.status == Status.carry) return;
+                emptyContainer.enabled = true;
+                fullContainer.enabled = false;
                 isEmpty = true;
                 gameObject.tag = "ContainerEmpty";
 
-                GameManager.instance.SetBodyPartParent(transform.GetChild(1), player);
+                GameManager.instance.SetBodyPartParent(transform.GetChild(transform.childCount - 1), player);
                 GameManager.instance.status = Status.carry;
 
 
@@ -52,6 +55,7 @@ public class Container_v2 : MonoBehaviour
         if (collision.tag == "Player")
         {
             if (GameManager.instance.status == Status.empty && isEmpty) return;
+            if (GameManager.instance.status == Status.carry && !isEmpty) return;
             inRange = true;
             Dialog.enabled = true;
         }

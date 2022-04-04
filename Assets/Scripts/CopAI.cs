@@ -8,11 +8,13 @@ public class CopAI : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
     [SerializeField] private float nextWaypointDistance = 3f;
+    [SerializeField] private Animator animator;
 
     private Path path;
     private Seeker seeker;
     private Transform target;
     private Rigidbody2D body;
+    private SpriteRenderer sprite;
     private Vector2 direction;
     private Vector2 force;
 
@@ -22,18 +24,38 @@ public class CopAI : MonoBehaviour
     private bool isDistracted = false;
     private bool hasBeenRedirected = false;
 
+    private float time = 0.0f;
+    private float timeLooking = 5f;
+
+    private bool isLookingFor = false;
+
+
     void Start()
     {
         numberOfContainers = GameManager.instance.ContainersPosition.Count;
         seeker = GetComponent<Seeker>();
         body = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
         UpdatePath();
     }
 
-    // Update is called once per frame
+    private void Update()
+    {
+        if (isLookingFor)
+        {
+            if (time < Time.time)
+            {
+                isLookingFor = false;
+                animator.SetBool("isLookingFor", isLookingFor);
+                return;
+            }
+        }
+    }
     void FixedUpdate()
     {
-        if (path == null) return;
+        if (path == null || isLookingFor) return;
+
+
 
         if (GameManager.instance.isDistractorOn && !hasBeenRedirected) { isDistracted = true; hasBeenRedirected = true; }
         
@@ -41,16 +63,16 @@ public class CopAI : MonoBehaviour
         if (CurrentWaypoint >= path.vectorPath.Count || isDistracted)
         {
             if (isDistracted) isDistracted = false;
-            reachedEndOfPath = true;
             UpdatePath();
             return;
         }
-        else
-        {
-            reachedEndOfPath = false;
-        }
         direction = ((Vector2)path.vectorPath[CurrentWaypoint] - body.position).normalized;
         force = direction * speed * Time.deltaTime;
+        animator.SetFloat("Speed", Mathf.Abs(force.magnitude));
+        if(force.x > 0.01f)
+            sprite.flipX = true;
+        else
+            sprite.flipX = false;
 
         body.AddForce(force);
 
@@ -67,13 +89,17 @@ public class CopAI : MonoBehaviour
         {
             path = p;
             CurrentWaypoint = 0;
-            reachedEndOfPath = true;
-            Debug.Log("Se completo el path");
+            animator.SetFloat("Speed", 0.0f);
+            isLookingFor = true;
+            animator.SetBool("isLookingFor", isLookingFor);
+            time = Time.time + timeLooking;
+            Debug.Log("se completo el path");
         }
     }
 
     private void UpdatePath()
     {
+        if (isLookingFor) return;
         if (seeker.IsDone())
         {
             if (GameManager.instance.isDistractorOn)

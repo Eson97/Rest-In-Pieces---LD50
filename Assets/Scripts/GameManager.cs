@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public int distractor = 1;
     public Status status = Status.empty;
     public bool isDistractorOn = false;
+    private Vector3 spawnPoint = new Vector3(0, -1, 0);
 
     public void SetBodyPartParent(Transform parent)
     {
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
     public void RemoveBodyPartParent()
     {
         currentBodyPart.parent = null;
-        currentBodyPart.position = player.transform.position;
+        currentBodyPart.position = (Vector3)(player.transform.position + spawnPoint);
     }
 
 }
